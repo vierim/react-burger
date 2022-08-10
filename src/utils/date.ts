@@ -1,9 +1,10 @@
 import { DAY_FORM } from "./constants";
 
-export default function styledDate(data) {
-  const orderDate = new Date(data);
-  const currentDate = new Date();
-  let day = "";
+export default function styledDate(data: string): string {
+  
+  const orderDate: Date = new Date(data);
+  const currentDate: Date = new Date();
+  let day = '';
 
   const dayDelay = currentDate.getDate() - orderDate.getDate();
 
@@ -21,9 +22,9 @@ export default function styledDate(data) {
 
   } else if (dayDelay > 19) {
     const dayDelayToString = dayDelay.toString();
-    const lastSymbol = dayDelayToString[dayDelayToString.length - 1];
-    const dayForm = DAY_FORM[lastSymbol];
+    const lastSymbol = parseInt(dayDelayToString[dayDelayToString.length - 1]);
 
+    const dayForm = DAY_FORM[lastSymbol];
     day = `${dayDelay} ${dayForm} назад`;
   }
 
