@@ -19,7 +19,7 @@ function calculateOrderCost(
   }, 0);
 }
 
-function compareOrdersDate(a: TOrder, b: TOrder) {
+function compareOrdersDate(a: TOrder, b: TOrder): number {
   const x = new Date(a.updatedAt).getTime();
   const y = new Date(b.updatedAt).getTime();
 
