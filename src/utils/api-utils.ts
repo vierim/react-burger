@@ -1,10 +1,15 @@
 import { CONFIG } from "./constants";
 import { getCookie, setCookie } from "./cookies";
+import { TFetchOpts, TUpdateTokenResponse } from "../types";
 
-export const checkResponse = (res) =>
+export const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : Promise.reject(res);
 
-export async function fetchWithRefresh(url, opts) {
+export const fetchWithRefresh = async (
+  url: string,
+  opts: TFetchOpts
+): Promise<Response> => {
+
   if (!getCookie("token") && localStorage.getItem("refreshToken") === null) {
     return Promise.reject("401 Unauthorized");
   }
@@ -13,18 +18,23 @@ export async function fetchWithRefresh(url, opts) {
     if (!getCookie("token")) {
       throw new Error("accessToken is empty");
     }
-
     const res = await fetch(url, opts);
-    const data = await checkResponse(res);
-    return data;
-  } catch (err) {
+
+    if (!res.ok) {
+      throw res;
+    }
+
+    return res;
+  } catch (err: unknown) {
     let errorResponse;
 
-    if (!err.json) {
+    if (err instanceof Error) {
       errorResponse = {
         message: err.message,
       };
-    } else {
+    }
+
+    if (err instanceof Response) {
       errorResponse = await err.json();
     }
 
@@ -47,16 +57,16 @@ export async function fetchWithRefresh(url, opts) {
             Authorization: renewTokens.accessToken,
           },
         });
-        const data = await checkResponse(res);
-        return data;
+        
+        return res;
       }
     } else {
       return Promise.reject(err);
     }
   }
-}
+};
 
-async function getNewToken() {
+async function getNewToken(): Promise<TUpdateTokenResponse> {
   const res = await fetch(`${CONFIG.baseUrl}/${CONFIG.points.token}`, {
     method: "POST",
     headers: {
