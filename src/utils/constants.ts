@@ -24,4 +24,15 @@ export const WS_URL = {
   personalFeed: 'wss://norma.nomoreparties.space/orders',
 }
 
-export const DAY_FORM = ['дней', 'день', 'дня', 'дня', 'дня', 'дней', 'дней', 'дней', 'дней', 'дней'];
+export const DAY_FORM = [
+  'дней', 
+  'день', 
+  'дня', 
+  'дня', 
+  'дня', 
+  'дней', 
+  'дней', 
+  'дней', 
+  'дней', 
+  'дней'
+];
