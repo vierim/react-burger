@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { sendData } from '../../services/actions/order-details';
+import { sendDataThunk } from '../../services/actions/order-details/thunks';
 
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -31,7 +31,7 @@ const BurgerConstructor = () => {
   const handleOrderButtonClick = () => {
     if(user?.data) {
       const ingred = items.map((item) => item.id);
-      dispatch(sendData([bun, ...ingred, bun]));
+      dispatch(sendDataThunk([bun, ...ingred, bun]));
     } else {
       history.push('/login');
     }
