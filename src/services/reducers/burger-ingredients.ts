@@ -1,16 +1,28 @@
 import {
   GET_DATA_REQUEST,
-  GET_DATA_FAILED,
-  GET_DATA_SUCCESS,
-} from '../actions/burger-ingredients';
+  GET_DATA_SUCCESSFUL,
+  GET_DATA_FAILED
+} from '../actions/burger-ingredients/constants';
 
-const initialState = {
+import { TIngredientsActions } from '../actions/burger-ingredients/type';
+import { TIngredient } from '../../types';
+
+type TIngredientsState = {
+  data: Array<TIngredient>,
+  dataRequest: boolean,
+  dataFailed: boolean,
+};
+
+const initialState: TIngredientsState = {
   data: [],
   dataRequest: false,
   dataFailed: false,
 };
 
-export const burgerIngredientsReducer = (state = initialState, action) => {
+export const burgerIngredientsReducer = (
+  state = initialState, 
+  action: TIngredientsActions
+) => {
   switch (action.type) {
     case GET_DATA_REQUEST: {
       return {
@@ -19,9 +31,8 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         dataFailed: false
       };
     }
-    case GET_DATA_SUCCESS: {
+    case GET_DATA_SUCCESSFUL: {
       return { 
-        ...state, 
         data: [...state.data, ...action.payload], 
         dataRequest: false,
         dataFailed: false

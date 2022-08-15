@@ -6,10 +6,12 @@ import { rootReducer } from '../reducers';
 
 import { TAuthActions } from '../actions/auth/type';
 import { TConstructorActions } from '../actions/burger-constructor/type';
+import { TIngredientsActions } from '../actions/burger-ingredients/type';
 
 type TAppActions = 
   | TAuthActions 
-  | TConstructorActions;
+  | TConstructorActions
+  | TIngredientsActions;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
