@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from 'react-dnd';
 
-import { setBun, addItem } from '../../services/actions/burger-constructor';
+import { v4 as uuidv4 } from 'uuid';
+
+import { setBunAction, addItemAction } from '../../services/actions/burger-constructor';
 
 import FixedElement from '../fixed-element';
 import DragAndDrop from '../drag-and-drop';
@@ -20,10 +22,15 @@ const BurgerElements = () => {
     const { type } = ingredients.find((el) => el._id === id);
 
     if(type === 'bun') {
-      dispatch(setBun(id));
+      dispatch(setBunAction(id));
     } else {
-      if(bun.length > 0) 
-        dispatch(addItem(id));
+      if(bun.length > 0) {
+        const uid = uuidv4();
+        dispatch(addItemAction({
+          id, 
+          uid
+        }));
+      }
     }
   }
 

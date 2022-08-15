@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 
-import { removeItem, moveItem } from '../../services/actions/burger-constructor';
+import { removeItemAction, moveItemAction } from '../../services/actions/burger-constructor';
 
 import DndElement from '../dnd-element';
 
@@ -15,7 +15,7 @@ const DragAndDrop = () => {
   const ingredients = useSelector((state) => state.ingredients.data);
   const { items } = useSelector((state) => state.construct);
 
-  const handleDelete = (uid) => dispatch(removeItem(uid));
+  const handleDelete = (uid) => dispatch(removeItemAction(uid));
 
   const findCard = useCallback(
     (id) => {
@@ -38,7 +38,7 @@ const DragAndDrop = () => {
       newSortItems.splice(index, 1);
       newSortItems.splice(overIndex, 0, items[index]);
 
-      dispatch(moveItem(newSortItems));
+      dispatch(moveItemAction(newSortItems));
     },
     [findCard, items, dispatch]
   );
