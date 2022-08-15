@@ -16,6 +16,7 @@
 
 **Применяемые технологии**
 
+- TypeScript
 - React JS
 - React Router
 - Redux
