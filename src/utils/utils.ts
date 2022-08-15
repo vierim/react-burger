@@ -1,4 +1,4 @@
-export const logErrorToConsole = (err) => {
+export const logErrorToConsole = (err: Response): void => {
   if (!err.json) {
     console.error(err);
   } else {
@@ -6,4 +6,4 @@ export const logErrorToConsole = (err) => {
       console.error(err.message);
     });
   }
-}
+};
