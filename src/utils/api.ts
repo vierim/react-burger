@@ -9,7 +9,8 @@ import {
   TUserResponse, 
   TUserUpdate, 
   TIngredientsId,
-  TOrderResponse
+  TOrderResponse, 
+  TIngredientsResponse
 } from '../types';
 
 import { checkResponse, fetchWithRefresh } from './api-utils';
@@ -17,7 +18,7 @@ import { getCookie } from './cookies';
 
 //API for ingredietns
 
-export async function getIngredients() {
+export async function getIngredients(): Promise<TIngredientsResponse> {
   const res = await fetch(`${CONFIG.baseUrl}/${CONFIG.points.ingredients}`, {
     headers: {
       'Content-Type': 'application/json',
