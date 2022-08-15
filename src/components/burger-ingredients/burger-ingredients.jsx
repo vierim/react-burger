@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useSelector } from "react-redux";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { BASIC_TYPES } from '../../utils/constants.js';
+import { BASIC_TYPES } from '../../utils/constants';
 
 import IngredientsElement from '../ingredients-element';
 
