@@ -1,4 +1,8 @@
-import { TIngredient, TOrder } from "./types";
+import { 
+  TIngredient, 
+  TOrder, 
+  TSortResult 
+} from "../types";
 
 export { calculateOrderCost, compareOrdersDate };
 
@@ -7,7 +11,7 @@ function calculateOrderCost(
   ingredientsData: Array<TIngredient>
 ): number {
   return orderIdList.reduce((prev, item) => {
-    const currentIngredient = ingredientsData.find(
+    const currentIngredient: TIngredient | undefined = ingredientsData.find(
       (el: TIngredient) => el._id === item
     );
 
@@ -19,7 +23,10 @@ function calculateOrderCost(
   }, 0);
 }
 
-function compareOrdersDate(a: TOrder, b: TOrder): number {
+function compareOrdersDate(
+  a: TOrder, 
+  b: TOrder
+): TSortResult {
   const x = new Date(a.updatedAt).getTime();
   const y = new Date(b.updatedAt).getTime();
 
