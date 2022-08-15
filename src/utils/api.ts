@@ -8,7 +8,7 @@ import {
   TUserNewPassword, 
   TUserResponse, 
   TUserUpdate, 
-  TIngredientsId,
+  TNewOrder,
   TOrderResponse, 
   TIngredientsResponse
 } from '../types';
@@ -135,7 +135,7 @@ export async function updateUserData(
 //API for orders
 
 export async function sendOrder(
-  data: Array<TIngredientsId>
+  data: TNewOrder
 ): Promise<TOrderResponse> {
   const res = await fetchWithRefresh(
     `${CONFIG.baseUrl}/${CONFIG.points.orders}`,
