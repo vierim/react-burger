@@ -33,6 +33,6 @@ const enhancer = composeEnhancers(
   applyMiddleware(socketMiddleware(wsActions), thunk)
 );
 
-const store = createStore(rootReducer, enhancer);
+export const store = createStore(rootReducer, enhancer);
 
 export default store;
