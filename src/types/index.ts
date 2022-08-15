@@ -72,6 +72,8 @@ export type TCurrentOrder = Omit<TOrder, 'ingredients'> & {
   };
 };
 
+export type TNewOrder = Array<TIngredientsId>;
+
 export type TFetchOpts = {
   readonly method: 'GET' | 'POST' | 'PATCH';
   readonly headers: {
