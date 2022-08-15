@@ -1,18 +1,30 @@
 import {
   SEND_ORDER_REQUEST,
-  SEND_ORDER_SUCCESS,
+  SEND_ORDER_SUCCESSFUL,
   SEND_ORDER_FAILED,
   CLOSE_ORDER_POPUP
-} from '../actions/order-details.js';
+} from '../actions/order-details/constants';
 
-const initialState = {
+import { TOrderDetailsActions } from '../actions/order-details/type';
+
+type TOrderDetailsState = {
+  showPopup: boolean;
+  number: number;
+  sendRequest: boolean;
+  requestFailed: boolean;
+};
+
+const initialState: TOrderDetailsState = {
   showPopup: false,
   number: 0, 
   sendRequest: false,
   requestFailed: false,
 };
 
-export const orderDetailsPopupReducer = (state = initialState, action) => {
+export const orderDetailsPopupReducer = (
+  state = initialState, 
+  action: TOrderDetailsActions
+) => {
   switch (action.type) {
     case SEND_ORDER_REQUEST: {
       return {
@@ -21,7 +33,7 @@ export const orderDetailsPopupReducer = (state = initialState, action) => {
         sendRequest: true
       };
     }
-    case SEND_ORDER_SUCCESS: {
+    case SEND_ORDER_SUCCESSFUL: {
       return { 
         ...state, 
         number: action.payload,

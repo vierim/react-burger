@@ -7,11 +7,13 @@ import { rootReducer } from '../reducers';
 import { TAuthActions } from '../actions/auth/type';
 import { TConstructorActions } from '../actions/burger-constructor/type';
 import { TIngredientsActions } from '../actions/burger-ingredients/type';
+import { TOrderDetailsActions } from '../actions/order-details/type';
 
 type TAppActions = 
   | TAuthActions 
   | TConstructorActions
-  | TIngredientsActions;
+  | TIngredientsActions
+  | TOrderDetailsActions;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
