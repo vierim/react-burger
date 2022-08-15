@@ -10,7 +10,7 @@ import BurgerConstructor from "../../components/burger-constructor";
 import AnimatedLoader from "../../components/animated-loader";
 import ErrorNotification from "../../components/error-notification";
 
-import { getData } from "../../services/actions/burger-ingredients";
+import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
 import { closeOrderPopup } from "../../services/actions/order-details";
 
 const Home = () => {
@@ -22,7 +22,7 @@ const Home = () => {
   const showOrderPopup = useSelector((state) => state.order.showPopup);
 
   useEffect(() => {
-    if (!ingredients.length) dispatch(getData());
+    if (!ingredients.length) dispatch(getDataThunk());
   }, [dispatch, ingredients]);
 
   const closeOrderDetails = () => {

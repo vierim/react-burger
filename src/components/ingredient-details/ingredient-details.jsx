@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-import { getData } from '../../services/actions/burger-ingredients';
+import { getDataThunk } from '../../services/actions/burger-ingredients/thunks';
 
 import styles from './ingredient-details.module.css';
 
@@ -18,7 +18,7 @@ const IngredientDetails = ({header}) => {
 
   useEffect(() => {
     if(!ingredients.length && !location.state) {
-      dispatch(getData());
+      dispatch(getDataThunk());
     }
   }, []);
 

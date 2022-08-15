@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getData } from "../../services/actions/burger-ingredients";
+import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
 import { calculateOrderCost } from '../../utils/helpers';
 
 import FeedUnit from "../feed-unit";
@@ -15,7 +15,7 @@ const ProfileFeed = () => {
   const ingredientsList = useSelector((store) => store.ingredients.data);
 
   useEffect(() => {
-    if (!ingredientsList.length) dispatch(getData());
+    if (!ingredientsList.length) dispatch(getDataThunk());
   }, [ingredientsList, dispatch]);
 
   const getPreviewsList = (orderIngredients) => {

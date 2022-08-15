@@ -8,7 +8,7 @@ import styledDate from "../../utils/date";
 import { WS_URL } from "../../utils/constants";
 
 import { WS_CONNECTION_INIT, WS_CONNECTION_CLOSE } from "../../services/actions/orders";
-import { getData } from "../../services/actions/burger-ingredients";
+import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
 import { calculateOrderCost } from "../../utils/helpers";
 
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -64,7 +64,7 @@ const FeedDetails = ({noModal}) => {
       }
 
       if (!ingredientsList.length) {
-        dispatch(getData());
+        dispatch(getDataThunk());
       }
     }
 
