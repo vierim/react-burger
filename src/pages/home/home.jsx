@@ -11,7 +11,7 @@ import AnimatedLoader from "../../components/animated-loader";
 import ErrorNotification from "../../components/error-notification";
 
 import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
-import { closeOrderPopup } from "../../services/actions/order-details";
+import { closeOrderPopupAction } from "../../services/actions/order-details";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Home = () => {
   }, [dispatch, ingredients]);
 
   const closeOrderDetails = () => {
-    dispatch(closeOrderPopup());
+    dispatch(closeOrderPopupAction());
   };
 
   return (
