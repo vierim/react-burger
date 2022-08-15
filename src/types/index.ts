@@ -13,6 +13,7 @@ import {
   TSuccessResponse,
   TUpdateTokenResponse,
   TOrderResponse,
+  TIngredientsResponse,
 } from './server-response';
 
 import { 
@@ -32,6 +33,7 @@ export type {
   TUpdateTokenResponse,
   TOrderResponse,
   TConstructorElement,
+  TIngredientsResponse,
 };
 
 export type TIngredient = {

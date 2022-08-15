@@ -1,5 +1,5 @@
 import { TUser } from './user';
-import { TCurrentOrder } from './index';
+import { TCurrentOrder, TIngredient } from './index';
 
 export type TUserResponse = {
   readonly success: boolean;
@@ -27,3 +27,8 @@ export type TOrderResponse = {
   readonly name: string;
   readonly order: TCurrentOrder;
 };
+
+export type TIngredientsResponse = {
+  readonly success: boolean;
+  readonly data: Array<TIngredient>;
+}
