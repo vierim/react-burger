@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { checkAuthUser } from "../../services/actions/auth";
+import { checkAuthUserThunk } from "../../services/actions/auth/thunks";
 
 import ProfileSidebar from "../../components/profile-sidebar";
 import ProfileForm from "../../components/profile-form";
@@ -16,7 +16,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!sendRequest) {
-      dispatch(checkAuthUser());
+      dispatch(checkAuthUserThunk());
     }
   }, []);
 

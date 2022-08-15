@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-import { sendLogoutRequest } from "../../services/actions/auth";
+import { sendLogoutRequestThunk } from "../../services/actions/auth/thunks";
 
 import styles from "./profile-sidebar.module.css";
 
@@ -12,7 +12,7 @@ const ProfileSidebar = ({ description }) => {
 
   const handleLogoutClick = (e) => {
     e.preventDefault();
-    dispatch(sendLogoutRequest());
+    dispatch(sendLogoutRequestThunk());
   };
 
   return (

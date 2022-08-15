@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { updateUserInfo } from "../../services/actions/auth";
+import { updateUserInfoThunk } from "../../services/actions/auth/thunks";
 
 import {
   Input,
@@ -79,7 +79,7 @@ const ProfileForm = () => {
     
     const { name, value } = field;
 
-    dispatch(updateUserInfo({[name]: value }));
+    dispatch(updateUserInfoThunk({[name]: value }));
     handleCancelClick();
   };
 

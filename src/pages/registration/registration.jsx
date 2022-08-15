@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { sendRegistrationRequest } from "../../services/actions/auth";
+import { sendRegistrationRequestThunk } from "../../services/actions/auth/thunks";
 
 import {
   Input,
@@ -23,7 +23,7 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendRegistrationRequest(state));
+    dispatch(sendRegistrationRequestThunk(state));
   };
 
   const handleChange = (e) => {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
 import ProtectedRoute from "../protected-route";
-import { checkAuthUser } from "../../services/actions/auth";
+import { checkAuthUserThunk } from "../../services/actions/auth/thunks";
 
 import AppHeader from "../app-header";
 import IngredientDetails from "../ingredient-details";
@@ -35,7 +35,7 @@ const App = () => {
 
   useEffect(() => {
     if (!isAuthChecked && !sendRequest) {
-      dispatch(checkAuthUser());
+      dispatch(checkAuthUserThunk());
     }
   }, [isAuthChecked, sendRequest, dispatch]);
 

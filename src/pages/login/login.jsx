@@ -9,7 +9,7 @@ import {
 
 import AnimatedLoader from "../../components/animated-loader";
 
-import { sendLoginRequest } from "../../services/actions/auth";
+import { sendLoginRequestThunk } from "../../services/actions/auth/thunks";
 
 import styles from "./login.module.css";
 
@@ -25,7 +25,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendLoginRequest(state));
+    dispatch(sendLoginRequestThunk(state));
   };
 
   const handleChange = (e) => {
