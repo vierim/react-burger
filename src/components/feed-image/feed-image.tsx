@@ -1,12 +1,16 @@
-import PropTypes from 'prop-types';
+import styles from './feed-image.module.css';
 
-import styles from "./feed-image.module.css";
+interface IFeedImageProps {
+  image: string;
+  more?: number;
+  overlap: number;
+}
 
-const FeedImage = (props) => {
+const FeedImage = (props: IFeedImageProps) => {
   const { image, more, overlap } = props;
 
   return (
-    <div className={styles.container} style={{zIndex: overlap}}>
+    <div className={styles.container} style={{ zIndex: overlap }}>
       <div className={styles.back}></div>
       <img className={styles.image} src={image} alt="" />
       {more && (
@@ -16,12 +20,6 @@ const FeedImage = (props) => {
       )}
     </div>
   );
-};
-
-FeedImage.propTypes = {
-  image: PropTypes.string.isRequired, 
-  more: PropTypes.number,
-  overlap: PropTypes.number.isRequired,
 };
 
 export default FeedImage;
