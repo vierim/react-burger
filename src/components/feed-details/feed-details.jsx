@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import { getCookie } from "../../utils/cookies";
 import styledDate from "../../utils/date";
 import { WS_URL } from "../../utils/constants";
-
-import { WS_CONNECTION_INIT, WS_CONNECTION_CLOSE } from "../../services/actions/orders";
-import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
 import { calculateOrderCost } from "../../utils/helpers";
+
+import { wsConnectionInitAction, wsConnectionCloseAction } from "../../services/actions/orders";
+import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
 
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import FeedStatus from "../feed-status";
@@ -55,12 +55,12 @@ const FeedDetails = ({noModal}) => {
   useEffect(() => {
     if (!location.state) {
       if (match) {
-        dispatch({ type: WS_CONNECTION_INIT, payload: WS_URL.feed });
+        dispatch(wsConnectionInitAction(WS_URL.feed));
       } else {
         const accessToken = getCookie("token");
         const wsUrl = `${WS_URL.personalFeed}?token=${accessToken}`;
 
-        dispatch({ type: WS_CONNECTION_INIT, payload: wsUrl });
+        dispatch(wsConnectionInitAction(wsUrl));
       }
 
       if (!ingredientsList.length) {
@@ -70,7 +70,7 @@ const FeedDetails = ({noModal}) => {
 
     return function cleanup () {
       if (!location.state) {
-        dispatch({ type: WS_CONNECTION_CLOSE });
+        dispatch(wsConnectionCloseAction());
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
