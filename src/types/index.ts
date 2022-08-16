@@ -8,6 +8,14 @@ import {
 } from './user';
 
 import {
+  TOrderStatus,
+  TOrderStatusRus,
+  TOrder,
+  TCurrentOrder,
+  TNewOrder
+} from './orders';
+
+import {
   TUserResponse,
   TAuthResponse,
   TSuccessResponse,
@@ -27,6 +35,11 @@ export type {
   TUserEmail,
   TUserNewPassword,
   TUserUpdate,
+  TOrderStatus,
+  TOrderStatusRus,
+  TOrder,
+  TCurrentOrder,
+  TNewOrder,
   TUserResponse,
   TAuthResponse,
   TSuccessResponse,
@@ -52,27 +65,6 @@ export type TIngredient = {
 };
 
 export type TIngredientsId = Array<string>;
-
-export type TOrder = {
-  readonly _id: string;
-  readonly createdAt: string;
-  readonly ingredients: Array<string>;
-  readonly name: string;
-  readonly number: number;
-  readonly status: 'created' | 'pending' | 'done' | 'cancelled';
-  readonly updatedAt: string;
-};
-
-export type TCurrentOrder = Omit<TOrder, 'ingredients'> & {
-  readonly ingredients: Array<TIngredient>;
-  readonly price: number;
-  readonly owner: TUser & {
-    readonly createdAt: string;
-    readonly updatedAt: string;
-  };
-};
-
-export type TNewOrder = Array<TIngredientsId>;
 
 export type TFetchOpts = {
   readonly method: 'GET' | 'POST' | 'PATCH';
