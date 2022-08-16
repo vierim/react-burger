@@ -1,10 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 
-import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import HeaderButton from "../header-button";
+import HeaderButton from '../header-button';
 
-import styles from "./app-header.module.css";
+import styles from './app-header.module.css';
 
 const AppHeader = () => {
   const location = useLocation();
@@ -32,7 +32,7 @@ const AppHeader = () => {
             </li>
           </ul>
         </nav>
-        {location.pathname !== "/" ? (
+        {location.pathname !== '/' ? (
           <Link to="/">
             <Logo />
           </Link>
