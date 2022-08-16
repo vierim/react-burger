@@ -66,6 +66,14 @@ export type TIngredient = {
 
 export type TIngredientsId = Array<string>;
 
+export type TFeedDetailsIngredient = {
+  id: string;
+  name: string;
+  image: string;
+  count: number;
+  price: number;
+};
+
 export type TFetchOpts = {
   readonly method: 'GET' | 'POST' | 'PATCH';
   readonly headers: {
