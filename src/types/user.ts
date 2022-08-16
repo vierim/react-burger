@@ -19,5 +19,5 @@ export type TUserNewPassword = {
 };
 
 export type TUserUpdate = {
-  readonly [fn in keyof TUserData]?: TUserData[fn];
+  readonly [prop in keyof TUserData]?: TUserData[prop];
 };
