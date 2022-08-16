@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams, useLocation, useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/store';
 
-import { TFeedDetailsIngredient, TOrderStatus } from '../../types';
+import { TFeedDetailsIngredient } from '../../types';
+import { 
+  IFeedDetailsProps, 
+  IFeedDetailsParams, 
+  IFeedDetailsState 
+} from './interface';
 
 import { getCookie } from '../../utils/cookies';
 import styledDate from '../../utils/date';
@@ -20,27 +25,6 @@ import FeedStatus from '../feed-status';
 import FeedImage from '../feed-image';
 
 import styles from './feed-details.module.css';
-
-// interfaces
-
-interface IFeedDetailsProps {
-  noModal: boolean;
-}
-
-interface IFeedDetailsParams {
-  id: string;
-}
-
-interface IFeedDetailsState {
-  number: number;
-  name: string;
-  status: TOrderStatus;
-  ingredients: Array<TFeedDetailsIngredient>;
-  updateAt: string;
-  price: number;
-}
-
-// component
 
 const FeedDetails = (props: IFeedDetailsProps) => {
   const { noModal } = props;
