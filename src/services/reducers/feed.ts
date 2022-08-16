@@ -1,15 +1,27 @@
 import {
   WS_CONNECTION_FETCHING,
-  WS_CONNECTION_SUCCESS,
+  WS_CONNECTION_SUCCESSFUL,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSE,
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS,
-} from "../actions/orders";
+} from "../actions/orders/constants";
+
+import { TOrder } from '../../types'
+import { TWsConnectionActions } from "../actions/orders/type";
 
 import { compareOrdersDate } from "../../utils/helpers";
 
-const initialState = {
+type TFeedState = {
+  isFetching: boolean,
+  wsConnected: boolean,
+  orders: Array<TOrder>,
+  total: number | undefined,
+  totalToday: number | undefined,
+  error: boolean | undefined,
+};
+
+const initialState: TFeedState = {
   isFetching: false,
   wsConnected: false,
   orders: [],
@@ -18,10 +30,11 @@ const initialState = {
   error: undefined,
 };
 
-export const feedReducer = (state = initialState, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
+export const feedReducer = (
+  state = initialState, 
+  action: TWsConnectionActions
+) => {
+  switch (action.type) {
     case WS_CONNECTION_FETCHING: {
       return {
         ...state,
@@ -30,7 +43,7 @@ export const feedReducer = (state = initialState, action) => {
         error: undefined,
       };
     }
-    case WS_CONNECTION_SUCCESS: {
+    case WS_CONNECTION_SUCCESSFUL: {
       return {
         ...state,
         isFetching: false,
@@ -62,19 +75,18 @@ export const feedReducer = (state = initialState, action) => {
       };
     }
     case WS_GET_ORDERS: {
-      const { orders, total, totalToday } = payload;
-
-      const filteredOrders = orders.filter((item) => {
-        return item.ingredients.every((el) => el !== null);
+      const filteredOrders = action.payload.orders.filter((item: TOrder) => {
+        return item.ingredients.every((el: string) => el !== null);
       });
+      
       filteredOrders.sort(compareOrdersDate);
 
       return {
         ...state,
         error: undefined,
         orders: filteredOrders,
-        total,
-        totalToday,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday
       };
     }
     default:

@@ -8,12 +8,14 @@ import { TAuthActions } from '../actions/auth/type';
 import { TConstructorActions } from '../actions/burger-constructor/type';
 import { TIngredientsActions } from '../actions/burger-ingredients/type';
 import { TOrderDetailsActions } from '../actions/order-details/type';
+import { TWsConnectionActions } from '../actions/orders/type';
 
-type TAppActions = 
+export type TAppActions = 
   | TAuthActions 
   | TConstructorActions
   | TIngredientsActions
-  | TOrderDetailsActions;
+  | TOrderDetailsActions
+  | TWsConnectionActions;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
