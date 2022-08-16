@@ -16,8 +16,8 @@ type TFeedState = {
   isFetching: boolean,
   wsConnected: boolean,
   orders: Array<TOrder>,
-  total: number | undefined,
-  totalToday: number | undefined,
+  total: number,
+  totalToday: number,
   error: boolean | undefined,
 };
 
@@ -25,8 +25,8 @@ const initialState: TFeedState = {
   isFetching: false,
   wsConnected: false,
   orders: [],
-  total: undefined,
-  totalToday: undefined,
+  total: 0,
+  totalToday: 0,
   error: undefined,
 };
 
