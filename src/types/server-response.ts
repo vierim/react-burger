@@ -1,5 +1,5 @@
 import { TUser } from './user';
-import { TCurrentOrder, TIngredient } from './index';
+import { TCurrentOrder, TIngredient, TOrder } from './';
 
 export type TUserResponse = {
   readonly success: boolean;
@@ -31,4 +31,11 @@ export type TOrderResponse = {
 export type TIngredientsResponse = {
   readonly success: boolean;
   readonly data: Array<TIngredient>;
+}
+
+export type TFeedResponse = {
+  readonly success: boolean;
+  readonly orders: Array<TOrder>;
+  readonly total: number;
+  readonly totalToday: number;
 }
