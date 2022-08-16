@@ -1,48 +1,81 @@
-import { useEffect, useState } from "react";
-import { useParams, useLocation, useRouteMatch } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useParams, useLocation, useRouteMatch } from 'react-router-dom';
+import { useSelector, useDispatch } from '../../services/store';
 
-import { getCookie } from "../../utils/cookies";
-import styledDate from "../../utils/date";
-import { WS_URL } from "../../utils/constants";
-import { calculateOrderCost } from "../../utils/helpers";
+import { TFeedDetailsIngredient, TOrderStatus } from '../../types';
 
-import { wsConnectionInitAction, wsConnectionCloseAction } from "../../services/actions/orders";
-import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
+import { getCookie } from '../../utils/cookies';
+import styledDate from '../../utils/date';
+import { WS_URL } from '../../utils/constants';
+import { calculateOrderCost } from '../../utils/helpers';
 
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import FeedStatus from "../feed-status";
-import FeedImage from "../feed-image";
+import {
+  wsConnectionInitAction,
+  wsConnectionCloseAction,
+} from '../../services/actions/orders';
+import { getDataThunk } from '../../services/actions/burger-ingredients/thunks';
 
-import styles from "./feed-details.module.css";
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import FeedStatus from '../feed-status';
+import FeedImage from '../feed-image';
 
-const FeedDetails = ({noModal}) => {
-  const dispatch = useDispatch();
+import styles from './feed-details.module.css';
+
+// interfaces
+
+interface IFeedDetailsProps {
+  noModal: boolean;
+}
+
+interface IFeedDetailsParams {
+  id: string;
+}
+
+interface IFeedDetailsState {
+  number: number;
+  name: string;
+  status: TOrderStatus;
+  ingredients: Array<TFeedDetailsIngredient>;
+  updateAt: string;
+  price: number;
+}
+
+// component
+
+const FeedDetails = (props: IFeedDetailsProps) => {
+  const { noModal } = props;
+
+  // router
   const location = useLocation();
-  const match = useRouteMatch("/feed/:id");
+  const match = useRouteMatch('/feed/:id');
+  const { id } = useParams<IFeedDetailsParams>();
 
-  const { id } = useParams();
+  // store
+  const dispatch = useDispatch();
   const { orders } = useSelector((store) => store.feed);
   const ingredientsList = useSelector((store) => store.ingredients.data);
-  const [state, setState] = useState(null);
 
-  const getIngredientsList = (ingredients) => {
-    const res = [];
+  // state
+  const [state, setState] = useState<IFeedDetailsState | undefined>(undefined);
+
+  const getIngredientsList = (ingredients: Array<string>) => {
+    const res: Array<TFeedDetailsIngredient> = [];
 
     ingredients.forEach((item) => {
-      const itemIndex = res.findIndex(resEl => resEl.id === item);
-      
+      const itemIndex = res.findIndex((resEl) => resEl.id === item);
+
       if (itemIndex === -1) {
         const current = ingredientsList.find((el) => el._id === item);
-        
-        res.push({
-          id: current._id,
-          name: current.name,
-          image: current.image_mobile,
-          count: 1,
-          price: current.price,
-        });
+
+        if (current) {
+          res.push({
+            id: current._id,
+            name: current.name,
+            image: current.image_mobile,
+            count: 1,
+            price: current.price,
+          });
+        }
       } else {
         const newCount = res[itemIndex].count + 1;
         res[itemIndex] = { ...res[itemIndex], count: newCount };
@@ -57,7 +90,7 @@ const FeedDetails = ({noModal}) => {
       if (match) {
         dispatch(wsConnectionInitAction(WS_URL.feed));
       } else {
-        const accessToken = getCookie("token");
+        const accessToken = getCookie('token');
         const wsUrl = `${WS_URL.personalFeed}?token=${accessToken}`;
 
         dispatch(wsConnectionInitAction(wsUrl));
@@ -68,11 +101,11 @@ const FeedDetails = ({noModal}) => {
       }
     }
 
-    return function cleanup () {
+    return function cleanup() {
       if (!location.state) {
         dispatch(wsConnectionCloseAction());
       }
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -103,7 +136,7 @@ const FeedDetails = ({noModal}) => {
   }, [orders, ingredientsList]);
 
   return (
-    <div className={`${styles.container} ${noModal && "mt-30"}`}>
+    <div className={`${styles.container} ${noModal && 'mt-30'}`}>
       {state && (
         <>
           <p className="text text_type_digits-default mb-10">#{state.number}</p>
@@ -112,7 +145,7 @@ const FeedDetails = ({noModal}) => {
             <FeedStatus status={state.status} />
           </div>
           <h3 className="text text_type_main-medium mb-6">Состав:</h3>
-          <div className={styles.ingredients + " mb-10"}>
+          <div className={styles.ingredients + ' mb-10'}>
             <ul className={styles.list}>
               {state.ingredients.length &&
                 state.ingredients.map(({ id, name, image, count, price }) => {
@@ -148,10 +181,6 @@ const FeedDetails = ({noModal}) => {
       )}
     </div>
   );
-};
-
-FeedDetails.propTypes = {
-  noModal: PropTypes.bool,
 };
 
 export default FeedDetails;
