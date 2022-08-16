@@ -84,3 +84,13 @@ export type TFetchOpts = {
 };
 
 export type TSortResult =  -1 | 0 | 1;
+
+export type TWsActionsMethods = {
+  init: string;
+  fetching: string;
+  close: string;
+  onOpen: string;
+  onClose: string;
+  onError: string;
+  onMessage: string;
+};
