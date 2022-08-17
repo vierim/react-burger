@@ -32,13 +32,12 @@ const FeedUnit: React.FC<IFeedUnitProps> = (props) => {
     });
   }, [updatedAt, previews]);
 
+  const clickHandler = () => {
+    history.push(`${pathname}/${id}`, { background: location });
+  };
+
   return (
-    <li
-      className={styles.item + ' p-6'}
-      onClick={() =>
-        history.push(`${pathname}/${id}`, { background: location })
-      }
-    >
+    <li className={styles.item + ' p-6'} onClick={clickHandler}>
       <div className={styles.details}>
         <p className="text text_type_digits-default">#{number}</p>
         <p className="text text_type_main-default text_color_inactive">
