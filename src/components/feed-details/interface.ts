@@ -1,7 +1,7 @@
 import { TFeedDetailsIngredient, TOrderStatus } from '../../types';
 
 export interface IFeedDetailsProps {
-  noModal: boolean;
+  noModal?: boolean;
 }
 
 export interface IFeedDetailsParams {

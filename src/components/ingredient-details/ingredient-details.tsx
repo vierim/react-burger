@@ -8,7 +8,7 @@ import { getDataThunk } from '../../services/actions/burger-ingredients/thunks';
 import styles from './ingredient-details.module.css';
 
 interface IIngredientDetailsProps {
-  header: string;
+  header?: string;
 }
 
 interface IIngredientParams {
