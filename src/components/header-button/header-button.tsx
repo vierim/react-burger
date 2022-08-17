@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
+import { IHeaderButtonProp } from './interface';
+
 import {
   BurgerIcon,
   ListIcon,
@@ -9,14 +11,7 @@ import {
 
 import styles from './header-button.module.css';
 
-interface IHeaderButtonProp {
-  icon: string;
-  text: string;
-  url: string;
-  exact?: boolean;
-}
-
-const HeaderButton = (props: IHeaderButtonProp) => {
+const HeaderButton: React.FC<IHeaderButtonProp> = (props) => {
   const { icon, text, url, exact } = props;
 
   const location = useLocation();

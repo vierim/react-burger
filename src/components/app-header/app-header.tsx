@@ -6,7 +6,7 @@ import HeaderButton from '../header-button';
 
 import styles from './app-header.module.css';
 
-const AppHeader = () => {
+const AppHeader: React.FC = () => {
   const location = useLocation();
 
   return (

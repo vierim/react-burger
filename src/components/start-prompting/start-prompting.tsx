@@ -1,4 +1,4 @@
-const StartPrompting = () => {
+const StartPrompting: React.FC = () => {
   return (
     <div className="mt-15 mb-15">
       <p className="text text_type_main-medium">

@@ -7,7 +7,7 @@ import OrdersCompleted from '../orders-completed';
 
 import styles from './stats.module.css';
 
-const Stats = () => {
+const Stats: React.FC = () => {
   const { orders, total, totalToday } = useSelector((store) => store.feed);
 
   const [completeOrders, setCompleteOrders] = useState<TOrder[]>([]);

@@ -1,12 +1,8 @@
 import styles from './feed-image.module.css';
 
-interface IFeedImageProps {
-  image: string;
-  more?: number;
-  overlap: number;
-}
+import { IFeedImageProps } from './interface';
 
-const FeedImage = (props: IFeedImageProps) => {
+const FeedImage: React.FC<IFeedImageProps> = (props) => {
   const { image, more, overlap } = props;
 
   return (

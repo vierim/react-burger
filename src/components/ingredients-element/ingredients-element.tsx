@@ -3,6 +3,8 @@ import { useDrag } from 'react-dnd';
 import { useSelector } from '../../services/store';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import { IIngredientsElementProps } from './interface';
+
 import {
   Counter,
   CurrencyIcon,
@@ -10,14 +12,7 @@ import {
 
 import styles from './ingredients-element.module.css';
 
-interface IIngredientsElementProps {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-}
-
-const IngredientsElement = (props: IIngredientsElementProps) => {
+const IngredientsElement: React.FC<IIngredientsElementProps> = (props) => {
   const { id, name, price, image } = props;
 
   const location = useLocation();

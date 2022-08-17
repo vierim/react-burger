@@ -1,6 +1,6 @@
 import styles from './animated-loader.module.css';
 
-const AnimatedLoader = () => {
+const AnimatedLoader: React.FC = () => {
   return(
     <div className={styles.container}>
       <div className={styles.loader}>

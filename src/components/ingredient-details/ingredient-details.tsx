@@ -3,21 +3,13 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/store';
 
 import { TIngredient } from '../../types';
+import { IIngredientDetailsProps, IIngredientParams } from './interface';
+
 import { getDataThunk } from '../../services/actions/burger-ingredients/thunks';
 
 import styles from './ingredient-details.module.css';
 
-interface IIngredientDetailsProps {
-  header?: string;
-}
-
-interface IIngredientParams {
-  id: string;
-}
-
-const IngredientDetails = (props: IIngredientDetailsProps) => {
-  const { header } = props;
-
+const IngredientDetails: React.FC<IIngredientDetailsProps> = ({ header }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 

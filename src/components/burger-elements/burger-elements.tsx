@@ -14,7 +14,7 @@ import StartPrompting from '../start-prompting';
 
 import styles from './burger-elements.module.css';
 
-const BurgerElements = () => {
+const BurgerElements: React.FC = () => {
   const dispatch = useDispatch();
 
   const ingredients = useSelector((store) => store.ingredients.data);

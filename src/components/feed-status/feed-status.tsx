@@ -1,19 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { TOrderStatus, TOrderStatusRus } from '../../types';
+import { IFeedStatusProps, IFeedStatusState } from './interface';
 
-interface IFeedStatusProps {
-  status: TOrderStatus;
-}
-
-interface IFeedStatusState {
-  statusText: TOrderStatusRus;
-  statusColor: string;
-}
-
-const FeedStatus = (props: IFeedStatusProps) => {
-  const { status } = props;
-
+const FeedStatus: React.FC<IFeedStatusProps> = ({ status }) => {
   const [state, setState] = useState<IFeedStatusState | undefined>(undefined);
 
   useEffect(() => {
