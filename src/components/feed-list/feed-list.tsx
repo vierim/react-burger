@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from '../../services/store';
 
-import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
-import { calculateOrderCost } from '../../utils/helpers';
+import { getDataThunk } from '../../services/actions/burger-ingredients/thunks';
+import { calculateOrderCost, getPreviewsList } from '../../utils/helpers';
 
-import FeedUnit from "../feed-unit";
+import FeedUnit from '../feed-unit';
 
-import styles from "./feed-list.module.css";
+import styles from './feed-list.module.css';
 
 const FeedList = () => {
   const dispatch = useDispatch();
-  
+
   const orders = useSelector((store) => store.feed.orders);
   const ingredientsList = useSelector((store) => store.ingredients.data);
 
@@ -18,23 +18,14 @@ const FeedList = () => {
     if (!ingredientsList.length) dispatch(getDataThunk());
   }, [ingredientsList, dispatch]);
 
-  const getPreviewsList = (orderIngredients) => {
-    const res = orderIngredients.map((item) => {
-      const current = ingredientsList.find((el) => el._id === item);
-      return current.image_mobile;
-    })
-
-    return res;
-  }
-
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
         {orders.length > 0 &&
           ingredientsList.length > 0 &&
           orders.map(({ _id, ingredients, name, number, updatedAt }) => {
-            const price = calculateOrderCost(ingredients,ingredientsList);
-            const previews = getPreviewsList(ingredients);
+            const price = calculateOrderCost(ingredients, ingredientsList);
+            const previews = getPreviewsList(ingredients, ingredientsList);
 
             return (
               <FeedUnit
