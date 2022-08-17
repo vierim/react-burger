@@ -1,10 +1,6 @@
-import { 
-  TIngredient, 
-  TOrder, 
-  TSortResult 
-} from "../types";
+import { TIngredient, TOrder, TSortResult } from '../types';
 
-export { calculateOrderCost, compareOrdersDate };
+export { calculateOrderCost, getPreviewsList, compareOrdersDate };
 
 function calculateOrderCost(
   orderIdList: string[],
@@ -15,7 +11,7 @@ function calculateOrderCost(
       (el: TIngredient) => el._id === item
     );
 
-    if (typeof currentIngredient !== "undefined") {
+    if (typeof currentIngredient !== 'undefined') {
       return prev + currentIngredient.price;
     } else {
       return prev;
@@ -23,10 +19,23 @@ function calculateOrderCost(
   }, 0);
 }
 
-function compareOrdersDate(
-  a: TOrder, 
-  b: TOrder
-): TSortResult {
+function getPreviewsList(
+  orderIdList: string[],
+  ingredientsData: Array<TIngredient>
+) {
+  const res: string[] = [];
+
+  orderIdList.forEach((item) => {
+    const current = ingredientsData.find((el) => el._id === item);
+    if (current) {
+      res.push(current.image_mobile);
+    }
+  });
+
+  return res;
+}
+
+function compareOrdersDate(a: TOrder, b: TOrder): TSortResult {
   const x = new Date(a.updatedAt).getTime();
   const y = new Date(b.updatedAt).getTime();
 
