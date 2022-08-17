@@ -1,14 +1,16 @@
-import { useRef } from "react";
-import { useSelector } from "react-redux";
-import { Redirect, Route, useHistory } from "react-router-dom";
+import { useRef } from 'react';
+import { useSelector } from '../../services/store';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 
-const ProtectedRoute = ({
+import { IProtectedRouteProps } from './interface';
+
+const ProtectedRoute: React.FC<IProtectedRouteProps> = ({
   anonymousOnly = false,
   authOnly = false,
-  hasParrentPage = false,
+  hasParrentPage,
   ...rest
 }) => {
-  const history = useHistory();
+  const history = useHistory() as any;
   const ref = useRef();
 
   const { isAuthChecked, data } = useSelector((store) => store.user);
@@ -24,10 +26,10 @@ const ProtectedRoute = ({
   }
 
   if (anonymousOnly && data !== null) {
-    if(ref.current) {
+    if (ref.current) {
       return <Redirect to={ref.current} />;
-    } 
-    return <Redirect to="/" />; 
+    }
+    return <Redirect to="/" />;
   }
 
   if (authOnly && isAuthChecked && data === null) {
