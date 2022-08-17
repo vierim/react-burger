@@ -1,28 +1,40 @@
-import { useHistory, useLocation } from "react-router-dom";
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import FeedStatus from "../feed-status";
-import FeedImage from "../feed-image";
+import { IFeedUnitProps, IFeedUnitState } from './interface';
 
-import styledDate from "../../utils/date";
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import FeedStatus from '../feed-status';
+import FeedImage from '../feed-image';
 
-import styles from "./feed-unit.module.css";
+import styledDate from '../../utils/date';
 
-const FeedUnit = (props) => {
+import styles from './feed-unit.module.css';
+
+const FeedUnit: React.FC<IFeedUnitProps> = (props) => {
+  const { id, number, updatedAt, name, price, previews, status } = props;
+
   const location = useLocation();
   const history = useHistory();
   const { pathname } = location;
 
-  const { id, number, updatedAt, name, price, previews, status } = props;
+  const [state, setState] = useState<IFeedUnitState | undefined>();
 
-  const styledUpdateAt = styledDate(updatedAt);
-  const previewsList = previews.slice(0, 6);
-  const hasMoreIngredients = previews.length - previewsList.length;
+  useEffect(() => {
+    const styledUpdateAt = styledDate(updatedAt);
+    const previewsList = previews.slice(0, 6);
+    const moreIngredients = previews.length - previewsList.length;
+
+    setState({
+      date: styledUpdateAt,
+      previewsList,
+      moreIngredients,
+    });
+  }, [updatedAt, previews]);
 
   return (
     <li
-      className={styles.item + " p-6"}
+      className={styles.item + ' p-6'}
       onClick={() =>
         history.push(`${pathname}/${id}`, { background: location })
       }
@@ -30,7 +42,7 @@ const FeedUnit = (props) => {
       <div className={styles.details}>
         <p className="text text_type_digits-default">#{number}</p>
         <p className="text text_type_main-default text_color_inactive">
-          {styledUpdateAt}
+          {state?.date}
         </p>
       </div>
       <div>
@@ -43,15 +55,18 @@ const FeedUnit = (props) => {
       </div>
       <div className={styles.content}>
         <div className={styles.ingredients}>
-          {previewsList.map((item, index) => {
-            const overlap = previewsList.length - index;
+          {state?.previewsList.map((item, index) => {
+            const overlap = state.previewsList.length - index;
 
-            if (index === previewsList.length - 1 && hasMoreIngredients > 0) {
+            if (
+              index === state.previewsList.length - 1 &&
+              state.moreIngredients > 0
+            ) {
               return (
                 <FeedImage
                   key={index}
                   image={item}
-                  more={hasMoreIngredients}
+                  more={state.moreIngredients}
                   overlap={overlap}
                 />
               );
@@ -69,16 +84,6 @@ const FeedUnit = (props) => {
       </div>
     </li>
   );
-};
-
-FeedUnit.propTypes = {
-  id: PropTypes.string.isRequired, 
-  number: PropTypes.number.isRequired,
-  updatedAt: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  previews: PropTypes.arrayOf(PropTypes.string).isRequired,
-  status: PropTypes.string,
 };
 
 export default FeedUnit;
