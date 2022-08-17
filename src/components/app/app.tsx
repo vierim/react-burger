@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   const history = useHistory();
   const location = useLocation() as any;
-  const background = location.state.background;
+  const background = location.state?.background;
 
   const { isAuthChecked, sendRequest } = useSelector((store) => store.user);
 
