@@ -1,27 +1,30 @@
-import { useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from '../../services/store';
+import { Link, NavLink } from 'react-router-dom';
 
-import { sendLogoutRequestThunk } from "../../services/actions/auth/thunks";
+import { IProfileSidebarProps } from './interface';
 
-import styles from "./profile-sidebar.module.css";
+import { sendLogoutRequestThunk } from '../../services/actions/auth/thunks';
 
-const ProfileSidebar = ({ description }) => {
+import styles from './profile-sidebar.module.css';
 
+const ProfileSidebar: React.FC<IProfileSidebarProps> = ({ description }) => {
   const dispatch = useDispatch();
 
-  const handleLogoutClick = (e) => {
-    e.preventDefault();
+  const handleLogoutClick = (
+    evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    evt.preventDefault();
     dispatch(sendLogoutRequestThunk());
   };
 
   return (
-    <div className={"mr-15 mt-30 " + styles.navigation}>
+    <div className={'mr-15 mt-30 ' + styles.navigation}>
       <ul className={styles.linkList}>
         <li className={styles.listItem}>
           <NavLink
             className={
-              styles.link + " text text_type_main-medium text_color_inactive"
+              styles.link + ' text text_type_main-medium text_color_inactive'
             }
             to="/profile"
             activeClassName={styles.active}
@@ -33,7 +36,7 @@ const ProfileSidebar = ({ description }) => {
         <li className={styles.listItem}>
           <NavLink
             className={
-              styles.link + " text text_type_main-medium text_color_inactive"
+              styles.link + ' text text_type_main-medium text_color_inactive'
             }
             to="/profile/orders"
             activeClassName={styles.active}
@@ -45,7 +48,7 @@ const ProfileSidebar = ({ description }) => {
         <li className={styles.listItem}>
           <Link
             className={
-              styles.link + " text text_type_main-medium text_color_inactive"
+              styles.link + ' text text_type_main-medium text_color_inactive'
             }
             onClick={handleLogoutClick}
             to="/logout"
@@ -59,10 +62,6 @@ const ProfileSidebar = ({ description }) => {
       </p>
     </div>
   );
-};
-
-ProfileSidebar.propTypes = {
-  description: PropTypes.string.isRequired,
 };
 
 export default ProfileSidebar;
