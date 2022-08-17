@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Switch, Route, useLocation, useHistory } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from '../../services/store';
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 
-import ProtectedRoute from "../protected-route";
-import { checkAuthUserThunk } from "../../services/actions/auth/thunks";
+import ProtectedRoute from '../protected-route';
+import { checkAuthUserThunk } from '../../services/actions/auth/thunks';
 
-import AppHeader from "../app-header";
-import IngredientDetails from "../ingredient-details";
-import FeedDetails from "../feed-details";
-import Modal from "../modal";
+import AppHeader from '../app-header';
+import IngredientDetails from '../ingredient-details';
+import FeedDetails from '../feed-details';
+import Modal from '../modal';
 
 import {
   HomePage,
@@ -20,16 +20,16 @@ import {
   ProfilePage,
   ProfileOrdersPage,
   NotFoundPage,
-} from "../../pages";
+} from '../../pages';
 
-import styles from "./app.module.css";
+import styles from './app.module.css';
 
-const App = () => {
+const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const location = useLocation();
-  const background = location.state?.background;
+  const location = useLocation() as any;
+  const background = location.state.background;
 
   const { isAuthChecked, sendRequest } = useSelector((store) => store.user);
 
@@ -44,30 +44,55 @@ const App = () => {
       <AppHeader />
       <main className={styles.content}>
         <Switch location={background || location}>
-          <Route path="/" exact>
+          <Route 
+            path="/" 
+            exact
+          >
             <HomePage />
           </Route>
 
           <Route
             path="/ingredients/:id"
-            children={<IngredientDetails header="Детали ингредиента" />}
+            children={
+              <IngredientDetails header="Детали ингредиента" />
+            }
           />
 
-          <Route path="/feed" exact>
+          <Route 
+            path="/feed" 
+            exact
+          >
             <OrderFeedPage />
           </Route>
 
-          <Route path="/feed/:id" children={<FeedDetails noModal />} />
+          <Route 
+            path="/feed/:id" 
+            children={
+              <FeedDetails noModal />
+            } 
+          />
 
-          <ProtectedRoute path="/login" anonymousOnly exact>
+          <ProtectedRoute 
+            path="/login" 
+            anonymousOnly 
+            exact
+          >
             <LoginPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/register" anonymousOnly exact>
+          <ProtectedRoute 
+            path="/register" 
+            anonymousOnly 
+            exact
+          >
             <RegistrationPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/forgot-password" anonymousOnly exact>
+          <ProtectedRoute 
+            path="/forgot-password"
+            anonymousOnly
+            exact
+          >
             <ForgotPasswordPage />
           </ProtectedRoute>
 
@@ -80,17 +105,27 @@ const App = () => {
             <ResetPasswordPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/profile" authOnly exact>
+          <ProtectedRoute 
+            path="/profile"
+            authOnly
+            exact
+          >
             <ProfilePage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/profile/orders" authOnly exact>
+          <ProtectedRoute 
+            path="/profile/orders"
+            authOnly
+            exact
+          >
             <ProfileOrdersPage />
           </ProtectedRoute>
 
           <ProtectedRoute
             path="/profile/orders/:id"
-            children={<FeedDetails noModal />}
+            children={
+              <FeedDetails noModal />
+            }
             authOnly
             exact
           />
