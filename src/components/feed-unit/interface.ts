@@ -12,6 +12,6 @@ export interface IFeedUnitProps {
 
 export interface IFeedUnitState {
   date: string;
-  previewsList: Array<any>;
+  previewsList: Array<string>;
   moreIngredients: number;
 }
