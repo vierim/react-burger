@@ -7,7 +7,7 @@ export interface IFeedUnitProps {
   name: string; 
   price: number; 
   previews: Array<string>;
-  status: TOrderStatus;
+  status?: TOrderStatus;
 }
 
 export interface IFeedUnitState {
