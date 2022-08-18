@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
 
+import { IProfileFormState, IProfileFormFieldState } from './interface';
+
 import { updateUserInfoThunk } from '../../services/actions/auth/thunks';
 
 import {
@@ -10,19 +12,7 @@ import {
 
 import styles from './profile-form.module.css';
 
-interface IProfileFormState {
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface IProfileFormFieldState {
-  name: string;
-  value: string;
-  ref: React.RefObject<HTMLInputElement> | undefined;
-}
-
-const ProfileForm = () => {
+const ProfileForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((store) => store.user);
