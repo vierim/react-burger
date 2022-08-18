@@ -8,3 +8,8 @@ export interface IProtectedRouteProps {
   hasParrentPage?: string;
   children?: React.ReactNode | Element;
 }
+
+export interface IFeedDetailsParams {
+  from?: string;
+  pathname: string;
+}

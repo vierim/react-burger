@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useSelector } from '../../services/store';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 
-import { IProtectedRouteProps } from './interface';
+import { IProtectedRouteProps, IFeedDetailsParams } from './interface';
 
 const ProtectedRoute: React.FC<IProtectedRouteProps> = ({
   anonymousOnly = false,
@@ -10,8 +10,8 @@ const ProtectedRoute: React.FC<IProtectedRouteProps> = ({
   hasParrentPage,
   ...rest
 }) => {
-  const history = useHistory() as any;
-  const ref = useRef();
+  const history = useHistory<IFeedDetailsParams>();
+  const ref = useRef('');
 
   const { isAuthChecked, data } = useSelector((store) => store.user);
 
