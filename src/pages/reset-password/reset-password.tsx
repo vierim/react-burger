@@ -1,30 +1,35 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
+import { IResetPasswordState } from './interface';
 
 import { updateUserPassword } from '../../utils/api';
 import { logErrorToConsole } from '../../utils/utils';
 
-import AnimatedLoader from "../../components/animated-loader";
+import AnimatedLoader from '../../components/animated-loader';
+import {
+  Input,
+  PasswordInput,
+  Button,
+} from '@ya.praktikum/react-developer-burger-ui-components';
 
-import styles from './reset-password.module.css';;
+import styles from './reset-password.module.css';
 
-const ResetPassword = () => {
-
-  const [state, setState] = useState({
+const ResetPassword: React.FC = () => {
+  const [state, setState] = useState<IResetPasswordState>({
     password: '',
     token: '',
   });
-  const [response, setResponse] = useState(false);
-  const [process, setProcess] = useState(false);
+  const [response, setResponse] = useState<boolean>(false);
+  const [process, setProcess] = useState<boolean>(false);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setState(prev => ({...prev, [name]: value}));
-  }
+    setState((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setProcess(true);
 
@@ -40,8 +45,8 @@ const ResetPassword = () => {
       })
       .finally(() => {
         setProcess(false);
-      })
-  }
+      });
+  };
 
   return (
     <>
@@ -51,44 +56,48 @@ const ResetPassword = () => {
         <Redirect
           to={{
             pathname: '/login',
-            state: { from: '/reset-password' }
+            state: { from: '/reset-password' },
           }}
         />
-        ) : (
+      ) : (
         <div className={styles.container}>
-          <h1 className="mb-6 text text_type_main-medium">Восстановление пароля</h1>
+          <h1 className="mb-6 text text_type_main-medium">
+            Восстановление пароля
+          </h1>
           <form className={'mb-20 ' + styles.form} onSubmit={onSubmit}>
             <div className={'mb-6 ' + styles.input}>
-              <PasswordInput 
-                onChange={onChange} 
-                value={state.password} 
-                name={'password'} 
+              <PasswordInput
+                onChange={onChange}
+                value={state.password}
+                name={'password'}
               />
             </div>
             <div className={'mb-6 ' + styles.input}>
               <Input
                 type={'text'}
                 placeholder={'Введите код из письма'}
-                onChange={onChange} 
-                value={state.token} 
+                onChange={onChange}
+                value={state.token}
                 error={false}
-                errorText={"Ошибка"}
+                errorText={'Ошибка'}
                 name={'token'}
-                size={"default"}
+                size={'default'}
               />
-            </div>        
+            </div>
             <Button type="primary" size="medium">
               Сохранить
             </Button>
           </form>
           <p className="mb-4 text text_type_main-default text_color_inactive">
-            Вспомнили пароль? <Link to="/login" className={styles.link}>Войти</Link>
+            Вспомнили пароль?{' '}
+            <Link to="/login" className={styles.link}>
+              Войти
+            </Link>
           </p>
         </div>
       )}
     </>
-    
   );
-}
+};
 
 export default ResetPassword;
