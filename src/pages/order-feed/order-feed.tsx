@@ -14,7 +14,7 @@ import Stats from '../../components/stats';
 
 import styles from './order-feed.module.css';
 
-const OrderFeed = () => {
+const OrderFeed: React.FC = () => {
   const dispatch = useDispatch();
 
   const isFetching = useSelector((store) => store.feed.isFetching);
