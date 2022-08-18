@@ -1,32 +1,35 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from '../../services/store';
 
-import { getCookie } from "../../utils/cookies";
+import { getCookie } from '../../utils/cookies';
 
-import { WS_URL } from "../../utils/constants";
-import { wsConnectionInitAction, wsConnectionCloseAction } from "../../services/actions/orders";
+import { WS_URL } from '../../utils/constants';
+import {
+  wsConnectionInitAction,
+  wsConnectionCloseAction,
+} from '../../services/actions/orders';
 
-import ProfileSidebar from "../../components/profile-sidebar";
-import ProfileFeed from "../../components/profile-feed";
-import AnimatedLoader from "../../components/animated-loader";
+import ProfileSidebar from '../../components/profile-sidebar';
+import ProfileFeed from '../../components/profile-feed';
+import AnimatedLoader from '../../components/animated-loader';
 
-import styles from "./profile-orders.module.css";
+import styles from './profile-orders.module.css';
 
-const ProfileOrders = () => {
+const ProfileOrders: React.FC = () => {
   const dispatch = useDispatch();
 
   const { isFetching, orders } = useSelector((store) => store.feed);
   const { sendRequest } = useSelector((store) => store.user);
 
   useEffect(() => {
-    const accessToken = getCookie("token");
+    const accessToken = getCookie('token');
     const wsUrl = `${WS_URL.personalFeed}?token=${accessToken}`;
 
     dispatch(wsConnectionInitAction(wsUrl));
 
     return function cleanup() {
       dispatch(wsConnectionCloseAction());
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
