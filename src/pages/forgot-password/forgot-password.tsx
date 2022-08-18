@@ -14,7 +14,7 @@ import {
 
 import styles from './forgot-password.module.css';
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const history = useHistory();
 
   const [email, setEmail] = useState<string>('');
