@@ -94,3 +94,11 @@ export type TWsActionsMethods = {
   onError: string;
   onMessage: string;
 };
+
+export type TBackground = {
+  pathname: string;
+  search: string;
+  hash: string;
+  state: null | undefined;
+  key: string;
+}

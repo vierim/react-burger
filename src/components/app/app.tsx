@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 
+import { ILocationState } from './interface';
+
 import ProtectedRoute from '../protected-route';
 import { checkAuthUserThunk } from '../../services/actions/auth/thunks';
 
@@ -28,7 +30,7 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const location = useLocation() as any;
+  const location = useLocation() as unknown as ILocationState;
   const background = location.state?.background;
 
   const { isAuthChecked, sendRequest } = useSelector((store) => store.user);
