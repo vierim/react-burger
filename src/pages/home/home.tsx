@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/store";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 
@@ -13,19 +13,18 @@ import ErrorNotification from "../../components/error-notification";
 import { getDataThunk } from "../../services/actions/burger-ingredients/thunks";
 import { closeOrderPopupAction } from "../../services/actions/order-details";
 
-const Home = () => {
+const Home: React.FC = () => {
   const dispatch = useDispatch();
 
-  const ingredients = useSelector((state) => state.ingredients.data);
-  const { dataRequest, dataFailed } = useSelector((state) => state.ingredients);
-
-  const showOrderPopup = useSelector((state) => state.order.showPopup);
+  const ingredients = useSelector((store) => store.ingredients.data);
+  const { dataRequest, dataFailed } = useSelector((store) => store.ingredients);
+  const showOrderPopup = useSelector((store) => store.order.showPopup);
 
   useEffect(() => {
     if (!ingredients.length) dispatch(getDataThunk());
   }, [dispatch, ingredients]);
 
-  const closeOrderDetails = () => {
+  const closeOrderDetails = (): void => {
     dispatch(closeOrderPopupAction());
   };
 
