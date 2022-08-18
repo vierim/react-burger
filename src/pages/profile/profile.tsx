@@ -18,6 +18,7 @@ const Profile: React.FC = () => {
     if (!sendRequest) {
       dispatch(checkAuthUserThunk());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
