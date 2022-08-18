@@ -1,15 +1,15 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from '../../services/store';
 
-import { checkAuthUserThunk } from "../../services/actions/auth/thunks";
+import { checkAuthUserThunk } from '../../services/actions/auth/thunks';
 
-import ProfileSidebar from "../../components/profile-sidebar";
-import ProfileForm from "../../components/profile-form";
-import AnimatedLoader from "../../components/animated-loader";
+import ProfileSidebar from '../../components/profile-sidebar';
+import ProfileForm from '../../components/profile-form';
+import AnimatedLoader from '../../components/animated-loader';
 
-import styles from "./profile.module.css";
+import styles from './profile.module.css';
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const dispatch = useDispatch();
 
   const { sendRequest } = useSelector((store) => store.user);
