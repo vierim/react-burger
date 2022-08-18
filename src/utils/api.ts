@@ -79,9 +79,7 @@ export async function resetUserPassword(
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      email: data,
-    }),
+    body: JSON.stringify(data),
   });
   return checkResponse(res);
 }
