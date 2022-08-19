@@ -3,6 +3,8 @@ import { useDrop } from 'react-dnd';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { IDragObject, TAddBurgerIngredient } from './interface';
+
 import {
   setBunAction,
   addItemAction,
@@ -20,7 +22,7 @@ const BurgerElements: React.FC = () => {
   const ingredients = useSelector((store) => store.ingredients.data);
   const { bun, items } = useSelector((store) => store.construct);
 
-  const addBurgerIngredient = (id: any): void => {
+  const addBurgerIngredient: TAddBurgerIngredient = (id) => {
     if (ingredients && ingredients.length > 0) {
       const current = ingredients.find((el) => el._id === id);
 
@@ -30,7 +32,12 @@ const BurgerElements: React.FC = () => {
         } else {
           if (bun.length > 0) {
             const uid = uuidv4();
-            dispatch(addItemAction({ id, uid }));
+            dispatch(
+              addItemAction({
+                id,
+                uid,
+              })
+            );
           }
         }
       }
@@ -42,8 +49,9 @@ const BurgerElements: React.FC = () => {
     collect: (monitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop(item: any) {
-      addBurgerIngredient(item.id);
+    drop(item) {
+      const dropElement = item as IDragObject;
+      addBurgerIngredient(dropElement.id);
     },
   });
 
