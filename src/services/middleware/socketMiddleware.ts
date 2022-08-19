@@ -1,30 +1,25 @@
-import { Middleware, MiddlewareAPI } from "redux";
-import { TAppActions, AppDispatch, RootState } from "../types";
+import { Middleware, MiddlewareAPI, AnyAction, Dispatch } from "redux";
+
+import { AppDispatch, RootState } from "../types";
+import { IWSActions } from "../actions/orders/interfaces";
+
 import { refreshToken } from "../../utils/api-utils";
 
-type TAction = {
-  type: TAppActions;
-  payload: string | number | undefined;
-};
-
-type TNextAction = (action: TAction) => unknown;
-
-const socketMiddleware = (ws: any): Middleware => {
-  console.log(ws);
+const socketMiddleware = (ws: IWSActions): Middleware => {
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
     let isConnected: boolean = false;
     let reconnectTimer: number = 0;
-    let url: string = '';
+    let url: URL;
 
-    return (next: TNextAction) => (action: TAction) => {
+    return (next: Dispatch<AnyAction>) => (action: AnyAction) => {
       const { dispatch } = store;
 
       if (action.type === ws.init) {
         dispatch({ type: ws.fetching });
 
-        if(typeof action.payload === 'string') {
+        if(action.payload instanceof URL) {
           url = action.payload;
           socket = new WebSocket(url);
           isConnected = true;
@@ -33,11 +28,17 @@ const socketMiddleware = (ws: any): Middleware => {
 
       if (socket) {
         socket.onopen = (event) => {
-          dispatch({ type: ws.onOpen, payload: event });
+          dispatch({ 
+            type: ws.onOpen, 
+            payload: event 
+          });
         };
 
         socket.onerror = (event) => {
-          dispatch({ type: ws.onError, payload: event });
+          dispatch({ 
+            type: ws.onError, 
+            payload: event
+          });
         };
 
         socket.onmessage = (event) => {
@@ -52,25 +53,40 @@ const socketMiddleware = (ws: any): Middleware => {
                   "token",
                   res.accessToken.replace("Bearer ", "")
                 );
-                dispatch({ type: ws.init, payload: wssUrl });
+                dispatch({ 
+                  type: ws.init, 
+                  payload: wssUrl 
+                });
               })
               .catch((err) => {
-                dispatch({ type: ws.onError, payload: err });
+                dispatch({ 
+                  type: ws.onError, 
+                  payload: err 
+                });
               });
             dispatch({ type: ws.close });
 
             return;
           }
 
-          dispatch({ type: ws.onMessage, payload: parsedData });
+          dispatch({ 
+            type: ws.onMessage, 
+            payload: parsedData 
+          });
         };
 
         socket.onclose = (event) => {
-          dispatch({ type: ws.onClose, payload: event });
+          dispatch({ 
+            type: ws.onClose, 
+            payload: event 
+          });
 
           if (isConnected) {
             reconnectTimer = window.setTimeout(() => {
-              dispatch({ type: ws.init, payload: url });
+              dispatch({ 
+                type: ws.init, 
+                payload: url 
+              });
             }, 5000);
           }
         };
