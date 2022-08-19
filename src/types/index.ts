@@ -56,6 +56,13 @@ export type {
   TMoveCard,
 };
 
+export type TIngredientsCode = 'bun' | 'main' | 'sauce';
+
+export type TBurgerElements = {
+  code: TIngredientsCode;
+  name: string;
+}[];
+
 export type TIngredient = {
   readonly __v: number;
   readonly _id: string;
@@ -68,7 +75,7 @@ export type TIngredient = {
   readonly name: string;
   readonly price: number;
   readonly proteins: number;
-  readonly type: 'bun' | 'main' | 'sauce';
+  readonly type: TIngredientsCode;
 };
 
 export type TIngredientsId = Array<string>;

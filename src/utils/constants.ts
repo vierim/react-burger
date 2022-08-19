@@ -1,3 +1,5 @@
+import { TBurgerElements } from "../types";
+
 export const CONFIG = {
   baseUrl: 'https://norma.nomoreparties.space/api',
   points: {
@@ -13,11 +15,11 @@ export const CONFIG = {
   }
 }
 
-export const BASIC_TYPES = {
-  bun: 'Булки',
-  main: 'Начинки',
-  sauce: 'Соусы'
-}
+export const BURGER_ELEMENTS: TBurgerElements = [
+  { code: 'bun', name: 'Булки' },
+  { code: 'main', name: 'Начинки' },
+  { code: 'sauce', name: 'Соусы' }
+];
 
 export const WS_URL = {
   feed: new URL('wss://norma.nomoreparties.space/orders/all'),
