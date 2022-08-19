@@ -28,6 +28,11 @@ import {
   TConstructorElement, 
 } from './burger-constructor';
 
+import { 
+  TFindCard, 
+  TMoveCard,
+} from './drag-n-drop';
+
 export type {
   TUser,
   TUserData,
@@ -47,6 +52,8 @@ export type {
   TOrderResponse,
   TConstructorElement,
   TIngredientsResponse,
+  TFindCard, 
+  TMoveCard,
 };
 
 export type TIngredient = {
