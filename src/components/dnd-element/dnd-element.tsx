@@ -12,7 +12,7 @@ import styles from './dnd-element.module.css';
 const DndElement: React.FC<IDndElementProps> = (props) => {
   const { name, price, image, uid, findCard, moveCard, onDelete } = props;
 
-  const originalIndex: any = findCard(uid).index;
+  const originalIndex = findCard(uid).index;
 
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -33,7 +33,7 @@ const DndElement: React.FC<IDndElementProps> = (props) => {
   );
 
   const [, drop] = useDrop(
-    (): any => ({
+    () => ({
       accept: 'currentBurger',
       hover({ uid: draggedId }: { uid: string }) {
         if (draggedId !== uid) {
