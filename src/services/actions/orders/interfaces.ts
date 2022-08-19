@@ -42,3 +42,13 @@ export interface IWsGetOrdersAction {
   readonly type: typeof WS_GET_ORDERS;
   readonly payload: TFeedResponse;
 }
+
+export interface IWSActions {
+  readonly init: typeof WS_CONNECTION_INIT;
+  readonly fetching: typeof WS_CONNECTION_FETCHING;
+  readonly close: typeof WS_CONNECTION_CLOSE;
+  readonly onOpen: typeof WS_CONNECTION_SUCCESSFUL;
+  readonly onClose: typeof WS_CONNECTION_CLOSED;
+  readonly onError: typeof WS_CONNECTION_ERROR;
+  readonly onMessage: typeof WS_GET_ORDERS;
+}
