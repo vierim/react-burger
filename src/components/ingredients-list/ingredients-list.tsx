@@ -5,10 +5,10 @@ import IngredientsElement from '../ingredients-element';
 import styles from './ingredients-list.module.css';
 
 const IngredientsList: React.FC<IIngredientsListProps> = (props) => {
-  const { data, name } = props;
+  const { data, name, refLink } = props;
 
   return (
-    <div>
+    <div ref={refLink}>
       <h2 className="text text_type_main-medium">{name}</h2>
       <div className={'pt-6 pr-2 pb-10 pl-4 ' + styles.container}>
         {data.map(({ _id, name, price, image }) => {
