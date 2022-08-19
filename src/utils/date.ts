@@ -1,38 +1,42 @@
-import { DAY_FORM } from "./constants";
-
 export default function styledDate(data: string): string {
-  
-  const orderDate: Date = new Date(data);
-  const currentDate: Date = new Date();
   let day = '';
+  const locale = navigator.language;
 
-  const dayDelay = currentDate.getDate() - orderDate.getDate();
+  const orderDate: Date = new Date(data);
+  const currentTime: Date = new Date();
+  const midnight = new Date();
+  midnight.setHours(0, 0, 0, 0);
+  const midnightDiff = currentTime.getTime() - midnight.getTime();
 
-  if (dayDelay === 0) {
-    day = "Сегодня";
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    timeZoneName: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
 
-  } else if (dayDelay === 1) {
-    day = "Вчера";
+  const orderTimeWrapper = new Intl.DateTimeFormat(locale, timeOptions);
+  const orderTime = orderTimeWrapper.format(orderDate);
 
-  } else if (dayDelay >= 2 && dayDelay <= 4) {
-    day = `${dayDelay} дня назад`;
-
-  } else if (dayDelay >= 5 && dayDelay <= 19) {
-    day = `${dayDelay} дней назад`;
-
-  } else if (dayDelay > 19) {
-    const dayDelayToString = dayDelay.toString();
-    const lastSymbol = parseInt(dayDelayToString[dayDelayToString.length - 1]);
-
-    const dayForm = DAY_FORM[lastSymbol];
-    day = `${dayDelay} ${dayForm} назад`;
-  }
-
-  const orderTimezone = -orderDate.getTimezoneOffset() / 60;
-  const orderTime = orderDate.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+  const orderDateWrapper = new Intl.NumberFormat(locale, {
+    style: 'unit',
+    unit: 'day',
+    unitDisplay: 'long',
   });
 
-  return `${day}, ${orderTime} i-GMT+${orderTimezone}`;
+  const timeDelay = currentTime.getTime() - orderDate.getTime();
+  const daysDelay = Math.ceil((midnight.getTime() - orderDate.getTime()) / 86400000);
+
+  if (timeDelay < midnightDiff) {
+    day = 'Сегодня';
+  } else {
+    if (daysDelay === 1) {
+      day = 'Вчера';
+    } else {
+      day = `${orderDateWrapper.format(daysDelay)} назад`;
+    }
+  }
+
+  const res = `${day}, ${orderTime}`;
+
+  return res;
 }
