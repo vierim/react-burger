@@ -23,7 +23,7 @@ const ProfileOrders: React.FC = () => {
 
   useEffect(() => {
     const accessToken = getCookie('token');
-    const wsUrl = `${WS_URL.personalFeed}?token=${accessToken}`;
+    const wsUrl = new URL(`${WS_URL.personalFeed}?token=${accessToken}`);
 
     dispatch(wsConnectionInitAction(wsUrl));
 

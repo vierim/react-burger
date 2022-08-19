@@ -21,7 +21,7 @@ import {
 import { TFeedResponse } from '../../../types/server-response';
 
 export const wsConnectionInitAction = (
-  url: string
+  url: URL
 ): IWsConnectionInitAction => ({
   type: WS_CONNECTION_INIT,
   payload: url,

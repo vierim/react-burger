@@ -20,8 +20,8 @@ export const BASIC_TYPES = {
 }
 
 export const WS_URL = {
-  feed: 'wss://norma.nomoreparties.space/orders/all',
-  personalFeed: 'wss://norma.nomoreparties.space/orders',
+  feed: new URL('wss://norma.nomoreparties.space/orders/all'),
+  personalFeed: new URL('wss://norma.nomoreparties.space/orders'),
 }
 
 export const DAY_FORM = [

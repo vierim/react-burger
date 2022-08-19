@@ -12,7 +12,7 @@ import { TFeedResponse } from "../../../types/server-response";
 
 export interface IWsConnectionInitAction {
   readonly type: typeof WS_CONNECTION_INIT;
-  readonly payload: string;
+  readonly payload: URL;
 }
 
 export interface IWsConnectionFetchingAction {

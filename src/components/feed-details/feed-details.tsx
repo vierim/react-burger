@@ -75,7 +75,7 @@ const FeedDetails = (props: IFeedDetailsProps) => {
         dispatch(wsConnectionInitAction(WS_URL.feed));
       } else {
         const accessToken = getCookie('token');
-        const wsUrl = `${WS_URL.personalFeed}?token=${accessToken}`;
+        const wsUrl = new URL(`${WS_URL.personalFeed}?token=${accessToken}`);
 
         dispatch(wsConnectionInitAction(wsUrl));
       }
