@@ -1,4 +1,4 @@
-import { TConstructorElement } from ".";
+import { TConstructorElement } from '.';
 
 export type TFindCard = (id: string) => {
   searchItem: TConstructorElement;
