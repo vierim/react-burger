@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
 import { TUserEmail } from '../../types';
@@ -17,15 +17,15 @@ import styles from './forgot-password.module.css';
 const ForgotPassword: React.FC = () => {
   const history = useHistory();
 
-  const [email, setEmail] = useState<string>('');
-  const [response, setResponse] = useState<boolean>(false);
-  const [process, setProcess] = useState<boolean>(false);
+  const [email, setEmail] = useState('');
+  const [response, setResponse] = useState(false);
+  const [process, setProcess] = useState(false);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (email.length > 6) {

@@ -78,7 +78,7 @@ export type TIngredient = {
   readonly type: TIngredientsCode;
 };
 
-export type TIngredientsId = Array<string>;
+export type TIngredientsId = string[];
 
 export type TFeedDetailsIngredient = {
   id: string;

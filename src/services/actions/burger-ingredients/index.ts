@@ -17,7 +17,7 @@ export const getDataRequestAction = (): IGetDataRequestAction => ({
 });
 
 export const getDataSuccessfulAction = (
-  data: Array<TIngredient>
+  data: TIngredient[]
 ): IGetDataSuccessfulAction => ({
   type: GET_DATA_SUCCESSFUL,
   payload: data

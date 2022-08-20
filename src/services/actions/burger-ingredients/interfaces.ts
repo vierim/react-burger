@@ -12,7 +12,7 @@ export interface IGetDataRequestAction {
 
 export interface IGetDataSuccessfulAction {
   readonly type: typeof GET_DATA_SUCCESSFUL;
-  readonly payload: Array<TIngredient>;
+  readonly payload: TIngredient[];
 }
 
 export interface IGetDataFailedAction {

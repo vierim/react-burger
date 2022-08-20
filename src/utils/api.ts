@@ -1,16 +1,16 @@
 import { CONFIG } from './constants';
-import { 
-  TUserData, 
-  TUserAuth, 
-  TAuthResponse, 
-  TSuccessResponse, 
-  TUserEmail, 
-  TUserNewPassword, 
-  TUserResponse, 
-  TUserUpdate, 
+import {
+  TUserData,
+  TUserAuth,
+  TAuthResponse,
+  TSuccessResponse,
+  TUserEmail,
+  TUserNewPassword,
+  TUserResponse,
+  TUserUpdate,
   TNewOrder,
-  TOrderResponse, 
-  TIngredientsResponse
+  TOrderResponse,
+  TIngredientsResponse,
 } from '../types';
 
 import { checkResponse, fetchWithRefresh } from './api-utils';
@@ -43,9 +43,7 @@ export async function createUserAccount(
   return checkResponse(res);
 }
 
-export async function loginToAccount(
-  data: TUserAuth
-): Promise<TAuthResponse> {
+export async function loginToAccount(data: TUserAuth): Promise<TAuthResponse> {
   const res = await fetch(`${CONFIG.baseUrl}/${CONFIG.points.login}`, {
     method: 'POST',
     headers: {
@@ -132,9 +130,7 @@ export async function updateUserData(
 
 //API for orders
 
-export async function sendOrder(
-  data: TNewOrder
-): Promise<TOrderResponse> {
+export async function sendOrder(data: TNewOrder): Promise<TOrderResponse> {
   const res = await fetchWithRefresh(
     `${CONFIG.baseUrl}/${CONFIG.points.orders}`,
     {
@@ -148,6 +144,6 @@ export async function sendOrder(
       }),
     }
   );
-  
+
   return checkResponse(res);
 }

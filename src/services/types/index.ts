@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { Action, ActionCreator } from "redux";
+import { Action, ActionCreator } from 'redux';
 
 import store from '../store';
 import { rootReducer } from '../reducers';
@@ -10,8 +10,8 @@ import { TIngredientsActions } from '../actions/burger-ingredients/type';
 import { TOrderDetailsActions } from '../actions/order-details/type';
 import { TWsConnectionActions } from '../actions/orders/type';
 
-export type TAppActions = 
-  | TAuthActions 
+export type TAppActions =
+  | TAuthActions
   | TConstructorActions
   | TIngredientsActions
   | TOrderDetailsActions

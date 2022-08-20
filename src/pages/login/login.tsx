@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
 
@@ -25,16 +25,16 @@ const Login: React.FC = () => {
     password: '',
   });
 
-  const handleSubmit = (e: React.FormEvent): void => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     dispatch(sendLoginRequestThunk(state));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setState((prev) => ({ 
-      ...prev, 
-      [name]: value 
+    setState((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 

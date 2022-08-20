@@ -11,7 +11,7 @@ import { TConstructorElement } from '../../types';
 
 type TConstructorState = {
   bun: string;
-  items: Array<TConstructorElement>;
+  items: TConstructorElement[];
 };
 
 const initialState: TConstructorState = {

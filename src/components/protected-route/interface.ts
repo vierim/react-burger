@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from 'react';
 
 export interface IProtectedRouteProps {
   path: string;
@@ -6,7 +6,7 @@ export interface IProtectedRouteProps {
   authOnly?: boolean;
   exact?: boolean;
   hasParrentPage?: string;
-  children?: React.ReactNode | Element;
+  children?: ReactNode | Element;
 }
 
 export interface IFeedDetailsParams {

@@ -47,7 +47,7 @@ const DndElement: React.FC<IDndElementProps> = (props) => {
 
   const opacity = isDragging ? 0 : 1;
 
-  const handleClose = (): void => {
+  const handleClose = () => {
     onDelete(uid);
   };
 

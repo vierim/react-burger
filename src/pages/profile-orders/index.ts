@@ -1,3 +1,3 @@
-import ProfileOrders from "./profile-orders";
+import ProfileOrders from './profile-orders';
 
 export default ProfileOrders;

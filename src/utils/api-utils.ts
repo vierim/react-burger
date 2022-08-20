@@ -1,6 +1,6 @@
-import { CONFIG } from "./constants";
-import { getCookie, setCookie } from "./cookies";
-import { TFetchOpts, TUpdateTokenResponse } from "../types";
+import { CONFIG } from './constants';
+import { getCookie, setCookie } from './cookies';
+import { TFetchOpts, TUpdateTokenResponse } from '../types';
 
 export const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : Promise.reject(res);
@@ -9,14 +9,13 @@ export const fetchWithRefresh = async (
   url: string,
   opts: TFetchOpts
 ): Promise<Response> => {
-
-  if (!getCookie("token") && localStorage.getItem("refreshToken") === null) {
-    return Promise.reject("401 Unauthorized");
+  if (!getCookie('token') && localStorage.getItem('refreshToken') === null) {
+    return Promise.reject('401 Unauthorized');
   }
 
   try {
-    if (!getCookie("token")) {
-      throw new Error("accessToken is empty");
+    if (!getCookie('token')) {
+      throw new Error('accessToken is empty');
     }
     const res = await fetch(url, opts);
 
@@ -39,16 +38,16 @@ export const fetchWithRefresh = async (
     }
 
     if (
-      errorResponse.message === "jwt expired" ||
-      errorResponse.message === "accessToken is empty"
+      errorResponse.message === 'jwt expired' ||
+      errorResponse.message === 'accessToken is empty'
     ) {
       const renewTokens = await getNewToken();
 
       if (!renewTokens.success) {
         return Promise.reject(renewTokens);
       } else {
-        localStorage.setItem("refreshToken", renewTokens.refreshToken);
-        setCookie("token", renewTokens.accessToken.split("Bearer ")[1]);
+        localStorage.setItem('refreshToken', renewTokens.refreshToken);
+        setCookie('token', renewTokens.accessToken.split('Bearer ')[1]);
 
         const res = await fetch(url, {
           ...opts,
@@ -57,7 +56,7 @@ export const fetchWithRefresh = async (
             Authorization: renewTokens.accessToken,
           },
         });
-        
+
         return res;
       }
     } else {
@@ -68,12 +67,12 @@ export const fetchWithRefresh = async (
 
 async function getNewToken(): Promise<TUpdateTokenResponse> {
   const res = await fetch(`${CONFIG.baseUrl}/${CONFIG.points.token}`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken"),
+      token: localStorage.getItem('refreshToken'),
     }),
   });
 
@@ -86,8 +85,8 @@ export async function refreshToken() {
   if (!renewTokens.success) {
     return Promise.reject(renewTokens);
   } else {
-    localStorage.setItem("refreshToken", renewTokens.refreshToken);
-    setCookie("token", renewTokens.accessToken.split("Bearer ")[1]);
+    localStorage.setItem('refreshToken', renewTokens.refreshToken);
+    setCookie('token', renewTokens.accessToken.split('Bearer ')[1]);
 
     return Promise.resolve(renewTokens);
   }

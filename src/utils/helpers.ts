@@ -4,7 +4,7 @@ export { calculateOrderCost, getPreviewsList, compareOrdersDate };
 
 function calculateOrderCost(
   orderIdList: string[],
-  ingredientsData: Array<TIngredient>
+  ingredientsData: TIngredient[]
 ): number {
   return orderIdList.reduce((prev, item) => {
     const currentIngredient: TIngredient | undefined = ingredientsData.find(
@@ -21,7 +21,7 @@ function calculateOrderCost(
 
 function getPreviewsList(
   orderIdList: string[],
-  ingredientsData: Array<TIngredient>
+  ingredientsData: TIngredient[]
 ) {
   const res: string[] = [];
 

@@ -38,7 +38,7 @@ export const removeItemAction = (
 });
 
 export const moveItemAction = (
-  items: Array<TConstructorElement>
+  items: TConstructorElement[]
 ): IMoveItemAction => ({
   type: MOVE_ITEM,
   payload: items

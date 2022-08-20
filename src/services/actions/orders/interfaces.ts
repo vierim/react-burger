@@ -6,9 +6,9 @@ import {
   WS_CONNECTION_CLOSE,
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS,
-} from "./constants";
+} from './constants';
 
-import { TFeedResponse } from "../../../types/server-response";
+import { TFeedResponse } from '../../../types/server-response';
 
 export interface IWsConnectionInitAction {
   readonly type: typeof WS_CONNECTION_INIT;

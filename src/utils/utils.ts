@@ -1,4 +1,4 @@
-export const logErrorToConsole = (err: Response): void => {
+export const logErrorToConsole = (err: Response) => {
   if (!err.json) {
     console.error(err);
   } else {

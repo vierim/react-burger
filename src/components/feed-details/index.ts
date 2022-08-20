@@ -1,3 +1,3 @@
-import FeedDetails from "./feed-details";
+import FeedDetails from './feed-details';
 
 export default FeedDetails;

@@ -14,7 +14,7 @@ const IngredientDetails: React.FC<IIngredientDetailsProps> = ({ header }) => {
   const location = useLocation();
 
   const { id } = useParams<IIngredientParams>();
-  const ingredients = useSelector((state) => state.ingredients.data);
+  const ingredients = useSelector((store) => store.ingredients.data);
   const [state, setState] = useState<TIngredient | undefined>(undefined);
 
   useEffect(() => {

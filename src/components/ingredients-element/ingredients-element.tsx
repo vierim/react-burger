@@ -18,7 +18,7 @@ const IngredientsElement: React.FC<IIngredientsElementProps> = (props) => {
   const location = useLocation();
   const history = useHistory();
 
-  const { bun, items } = useSelector((state) => state.construct);
+  const { bun, items } = useSelector((store) => store.construct);
 
   const [{ opacity }, ref] = useDrag({
     type: 'ingredients',

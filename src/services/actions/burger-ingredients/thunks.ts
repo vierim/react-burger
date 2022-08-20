@@ -2,7 +2,7 @@ import {
   getDataRequestAction, 
   getDataSuccessfulAction, 
   getDataFailedAction
-} from './';
+} from '.';
 
 import { AppDispatch, AppThunk } from '../../types';
 

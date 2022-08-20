@@ -25,7 +25,7 @@ export interface IRemoveItemAction {
 
 export interface IMoveItemAction {
   readonly type: typeof MOVE_ITEM;
-  readonly payload: Array<TConstructorElement>;
+  readonly payload: TConstructorElement[];
 }
 
 export interface IClearConstructionAction {

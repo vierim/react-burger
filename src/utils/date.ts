@@ -2,8 +2,8 @@ export default function styledDate(data: string): string {
   let day = '';
   const locale = navigator.language;
 
-  const orderDate: Date = new Date(data);
-  const currentTime: Date = new Date();
+  const orderDate = new Date(data);
+  const currentTime = new Date();
   const midnight = new Date();
   midnight.setHours(0, 0, 0, 0);
   const midnightDiff = currentTime.getTime() - midnight.getTime();

@@ -8,9 +8,9 @@ import { TIngredientsActions } from '../actions/burger-ingredients/type';
 import { TIngredient } from '../../types';
 
 type TIngredientsState = {
-  data: Array<TIngredient>,
-  dataRequest: boolean,
-  dataFailed: boolean,
+  data: TIngredient[];
+  dataRequest: boolean;
+  dataFailed: boolean;
 };
 
 const initialState: TIngredientsState = {

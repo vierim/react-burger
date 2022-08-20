@@ -1,6 +1,6 @@
-import { TOrder } from "../../types";
+import { TOrder } from '../../types';
 
 export interface IOrdersBoardProps {
-  completeOrders: Array<TOrder>;
-  pendingOrders?: Array<TOrder>;
+  completeOrders: TOrder[];
+  pendingOrders?: TOrder[];
 }

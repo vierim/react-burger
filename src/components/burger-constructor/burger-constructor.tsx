@@ -16,9 +16,9 @@ const BurgerConstructor: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const ingredients = useSelector((state) => state.ingredients.data);
-  const { bun, items } = useSelector((state) => state.construct);
-  const user = useSelector((state) => state.user);
+  const ingredients = useSelector((store) => store.ingredients.data);
+  const { bun, items } = useSelector((store) => store.construct);
+  const user = useSelector((store) => store.user);
 
   const burgerPrice = React.useMemo(() => {
     let price = 0;

@@ -12,7 +12,7 @@ export interface IFeedDetailsState {
   number: number;
   name: string;
   status: TOrderStatus;
-  ingredients: Array<TFeedDetailsIngredient>;
+  ingredients: TFeedDetailsIngredient[];
   updateAt: string;
   price: number;
 }

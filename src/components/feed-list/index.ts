@@ -1,3 +1,3 @@
-import FeedList from "./feed-list";
+import FeedList from './feed-list';
 
 export default FeedList;

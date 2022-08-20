@@ -1,3 +1,3 @@
-import FeedStatus from "./feed-status";
+import FeedStatus from './feed-status';
 
 export default FeedStatus;

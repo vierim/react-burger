@@ -2,7 +2,7 @@ import {
   TUser, 
   TIngredient, 
   TIngredientsId 
-} from './';
+} from '.';
 
 export type TOrderStatus = 'created' | 'pending' | 'done' | 'cancelled';
 export type TOrderStatusRus = 'Создан' | 'Готовится' | 'Выполнен' | 'Отменен';
@@ -10,7 +10,7 @@ export type TOrderStatusRus = 'Создан' | 'Готовится' | 'Выпо�
 export type TOrder = {
   readonly _id: string;
   readonly createdAt: string;
-  readonly ingredients: Array<string>;
+  readonly ingredients: string[];
   readonly name: string;
   readonly number: number;
   readonly status: TOrderStatus;
@@ -18,7 +18,7 @@ export type TOrder = {
 };
 
 export type TCurrentOrder = Omit<TOrder, 'ingredients'> & {
-  readonly ingredients: Array<TIngredient>;
+  readonly ingredients: TIngredient[];
   readonly price: number;
   readonly owner: TUser & {
     readonly createdAt: string;
@@ -26,4 +26,4 @@ export type TCurrentOrder = Omit<TOrder, 'ingredients'> & {
   };
 };
 
-export type TNewOrder = Array<TIngredientsId>;
+export type TNewOrder = TIngredientsId[];

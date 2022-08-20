@@ -1,3 +1,3 @@
-import FeedUnit from "./feed-unit";
+import FeedUnit from './feed-unit';
 
 export default FeedUnit;

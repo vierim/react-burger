@@ -47,7 +47,8 @@ const ProfileForm: React.FC = () => {
   }, [data]);
 
   const handleIconClick = (selectedField: 'name' | 'email' | 'password') => {
-    const currentElRef: React.RefObject<HTMLInputElement> = formFields[selectedField];
+    const currentElRef: React.RefObject<HTMLInputElement> =
+      formFields[selectedField];
 
     if (currentElRef.current) {
       const value = selectedField !== 'password' ? state[selectedField] : '';

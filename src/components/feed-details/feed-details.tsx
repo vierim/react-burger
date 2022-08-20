@@ -26,24 +26,21 @@ import FeedImage from '../feed-image';
 
 import styles from './feed-details.module.css';
 
-const FeedDetails = (props: IFeedDetailsProps) => {
+const FeedDetails: React.FC<IFeedDetailsProps> = (props) => {
   const { noModal } = props;
 
-  // router
   const location = useLocation();
   const match = useRouteMatch('/feed/:id');
   const { id } = useParams<IFeedDetailsParams>();
 
-  // store
   const dispatch = useDispatch();
   const { orders } = useSelector((store) => store.feed);
   const ingredientsList = useSelector((store) => store.ingredients.data);
 
-  // state
   const [state, setState] = useState<IFeedDetailsState | undefined>(undefined);
 
-  const getIngredientsList = (ingredients: Array<string>) => {
-    const res: Array<TFeedDetailsIngredient> = [];
+  const getIngredientsList = (ingredients: string[]) => {
+    const res: TFeedDetailsIngredient[] = [];
 
     ingredients.forEach((item) => {
       const itemIndex = res.findIndex((resEl) => resEl.id === item);

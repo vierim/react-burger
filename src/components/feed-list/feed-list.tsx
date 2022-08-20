@@ -8,7 +8,7 @@ import FeedUnit from '../feed-unit';
 
 import styles from './feed-list.module.css';
 
-const FeedList = () => {
+const FeedList: React.FC = () => {
   const dispatch = useDispatch();
 
   const orders = useSelector((store) => store.feed.orders);

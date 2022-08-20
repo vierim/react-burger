@@ -5,20 +5,20 @@ import {
   WS_CONNECTION_CLOSE,
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS,
-} from "../actions/orders/constants";
+} from '../actions/orders/constants';
 
-import { TOrder } from '../../types'
-import { TWsConnectionActions } from "../actions/orders/type";
+import { TOrder } from '../../types';
+import { TWsConnectionActions } from '../actions/orders/type';
 
-import { compareOrdersDate } from "../../utils/helpers";
+import { compareOrdersDate } from '../../utils/helpers';
 
 type TFeedState = {
-  isFetching: boolean,
-  wsConnected: boolean,
-  orders: Array<TOrder>,
-  total: number,
-  totalToday: number,
-  error: boolean | undefined,
+  isFetching: boolean;
+  wsConnected: boolean;
+  orders: TOrder[];
+  total: number;
+  totalToday: number;
+  error: boolean | undefined;
 };
 
 const initialState: TFeedState = {
@@ -31,7 +31,7 @@ const initialState: TFeedState = {
 };
 
 export const feedReducer = (
-  state = initialState, 
+  state = initialState,
   action: TWsConnectionActions
 ) => {
   switch (action.type) {
@@ -78,7 +78,7 @@ export const feedReducer = (
       const filteredOrders = action.payload.orders.filter((item: TOrder) => {
         return item.ingredients.every((el: string) => el !== null);
       });
-      
+
       filteredOrders.sort(compareOrdersDate);
 
       return {
@@ -86,10 +86,10 @@ export const feedReducer = (
         error: undefined,
         orders: filteredOrders,
         total: action.payload.total,
-        totalToday: action.payload.totalToday
+        totalToday: action.payload.totalToday,
       };
     }
     default:
       return state;
   }
-}
+};
