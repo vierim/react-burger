@@ -1,0 +1,9 @@
+.container {
+  width: calc(100% - 9px);
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: auto;
+  grid-column-gap: 24px;
+  grid-row-gap: 32px;
+  box-sizing: border-box;
+}
