@@ -66,7 +66,7 @@ const Registration: React.FC = () => {
             name={'password'}
           />
         </div>
-        <Button type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </form>

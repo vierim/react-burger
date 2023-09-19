@@ -61,6 +61,7 @@ const BurgerConstructor: React.FC = () => {
               <CurrencyIcon type="primary" />
             </div>
             <Button
+              htmlType="button"
               type="primary"
               size="large"
               onClick={handleOrderButtonClick}
