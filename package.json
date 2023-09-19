@@ -4,15 +4,6 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^16.11.19",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "@types/react-router": "^5.1.18",
-    "@types/uuid": "^8.3.4",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "react": "^17.0.2",
     "react-dnd": "^15.1.1",
@@ -23,7 +14,6 @@
     "react-scripts": "^5.0.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
-    "typescript": "^4.5.4",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.2"
   },
@@ -55,6 +45,16 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.19",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router": "^5.1.18",
+    "@types/uuid": "^8.3.4",
+    "typescript": "^4.5.4",
     "gh-pages": "^3.2.3",
     "redux-devtools-extension": "^2.13.9"
   }
